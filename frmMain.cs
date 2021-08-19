@@ -28,24 +28,40 @@ namespace Lab03_03
 
             BindingDataGridView(theOrders, dtpTuNgay.Value, dtpDenNgay.Value);
 
-            TongSo();
+            TongCong();
         }
 
         private void BindingDataGridView(List<TheOrder> theOrders, DateTime ngayBatDau, DateTime ngayKetThuc)
         {
             dgvTTDH.Rows.Clear();
 
+            string invoiceNo = "";
+            long thanhTien = 0;
+            int viTri = 0;
+
             foreach (var item in theOrders)
             {
                 if (item.Invoice.DeliveryDate >= ngayBatDau && item.Invoice.DeliveryDate <= ngayKetThuc)
                 {
-                    int i = dgvTTDH.Rows.Add();
+                    if (item.InvoiceNo == invoiceNo)
+                    {
+                        thanhTien += long.Parse(item.Price.ToString()) * long.Parse(item.Quantity.ToString());
+                        dgvTTDH.Rows[viTri].Cells[4].Value = thanhTien;
+                    }
+                    else
+                    {
+                        int i = dgvTTDH.Rows.Add();
 
-                    dgvTTDH.Rows[i].Cells[0].Value = item.No;
-                    dgvTTDH.Rows[i].Cells[1].Value = item.InvoiceNo;
-                    dgvTTDH.Rows[i].Cells[2].Value = item.Invoice.OrderDate;
-                    dgvTTDH.Rows[i].Cells[3].Value = item.Invoice.DeliveryDate;
-                    dgvTTDH.Rows[i].Cells[4].Value = item.Price * item.Quantity;
+                        dgvTTDH.Rows[i].Cells[0].Value = i + 1;
+                        dgvTTDH.Rows[i].Cells[1].Value = item.InvoiceNo;
+                        dgvTTDH.Rows[i].Cells[2].Value = item.Invoice.OrderDate;
+                        dgvTTDH.Rows[i].Cells[3].Value = item.Invoice.DeliveryDate;
+                        dgvTTDH.Rows[i].Cells[4].Value = item.Price * item.Quantity;
+
+                        invoiceNo = item.InvoiceNo;
+                        thanhTien = long.Parse(item.Price.ToString()) * long.Parse(item.Quantity.ToString());
+                        viTri = i;
+                    }
                 }
             }
         }
@@ -56,7 +72,7 @@ namespace Lab03_03
             List<TheOrder> theOrders = contextDB.TheOrders.ToList();
             BindingDataGridView(theOrders, dtpTuNgay.Value, dtpDenNgay.Value);
 
-            TongSo();
+            TongCong();
         }
 
         private void dtpDenNgay_ValueChanged(object sender, EventArgs e)
@@ -65,7 +81,7 @@ namespace Lab03_03
             List<TheOrder> theOrders = contextDB.TheOrders.ToList();
             BindingDataGridView(theOrders, dtpTuNgay.Value, dtpDenNgay.Value);
 
-            TongSo();
+            TongCong();
         }
 
         private void ckbXemTrongThang_CheckedChanged(object sender, EventArgs e)
@@ -81,12 +97,19 @@ namespace Lab03_03
 
             BindingDataGridView(theOrders, ngayBatDau, ngayKetThuc);
 
-            TongSo();
+            TongCong();
         }
 
-        private void TongSo()
+        private void TongCong()
         {
-            txtTongCong.Text = (dgvTTDH.Rows.Count - 1).ToString();
+            long tongCong = 0;
+
+            for (int i = 0; i < dgvTTDH.Rows.Count - 1; i++)
+            {
+                tongCong += long.Parse(dgvTTDH.Rows[i].Cells[4].Value.ToString());
+            }
+
+            txtTongCong.Text = tongCong.ToString();
         }
     }
 }

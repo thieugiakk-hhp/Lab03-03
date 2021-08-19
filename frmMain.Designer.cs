@@ -175,6 +175,8 @@ namespace Lab03_03
             // 
             // dgvTTDH
             // 
+            this.dgvTTDH.AllowUserToAddRows = false;
+            this.dgvTTDH.AllowUserToDeleteRows = false;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Roboto", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -201,6 +203,7 @@ namespace Lab03_03
             this.dgvTTDH.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvTTDH.Location = new System.Drawing.Point(0, 124);
             this.dgvTTDH.Name = "dgvTTDH";
+            this.dgvTTDH.ReadOnly = true;
             this.dgvTTDH.Size = new System.Drawing.Size(1024, 371);
             this.dgvTTDH.TabIndex = 0;
             // 
@@ -209,30 +212,35 @@ namespace Lab03_03
             this.ColumnSTT.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.ColumnSTT.HeaderText = "STT";
             this.ColumnSTT.Name = "ColumnSTT";
+            this.ColumnSTT.ReadOnly = true;
             this.ColumnSTT.Width = 75;
             // 
             // ColumnSHD
             // 
             this.ColumnSHD.HeaderText = "Số Hóa Đơn";
             this.ColumnSHD.Name = "ColumnSHD";
+            this.ColumnSHD.ReadOnly = true;
             this.ColumnSHD.Width = 200;
             // 
             // ColumnNDH
             // 
             this.ColumnNDH.HeaderText = "Ngày Đặt Hàng";
             this.ColumnNDH.Name = "ColumnNDH";
+            this.ColumnNDH.ReadOnly = true;
             this.ColumnNDH.Width = 250;
             // 
             // ColumnNGH
             // 
             this.ColumnNGH.HeaderText = "Ngày Giao Hàng";
             this.ColumnNGH.Name = "ColumnNGH";
+            this.ColumnNGH.ReadOnly = true;
             this.ColumnNGH.Width = 250;
             // 
             // ColumnTT
             // 
             this.ColumnTT.HeaderText = "Thành Tiền";
             this.ColumnTT.Name = "ColumnTT";
+            this.ColumnTT.ReadOnly = true;
             this.ColumnTT.Width = 206;
             // 
             // frmMain
